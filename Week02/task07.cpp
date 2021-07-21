@@ -14,10 +14,6 @@ int main()
     {
         std::cout << "Each x is a solution \n";
     }
-    else if (b == 0 && a != 0)
-    {
-        std::cout << "x = 0 \n";
-    }
     else
     {
         std::cout << "x = " << b / a;
