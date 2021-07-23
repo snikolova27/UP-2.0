@@ -17,7 +17,7 @@ int main()
         int scndDigit = (num/10) % 10;
         int thirdDigit = num % 10;
 
-        if(firstDigit == scndDigit || firstDigit==thirdDigit || scndDigit==thirdDigit)
+        if(firstDigit == scndDigit || firstDigit == thirdDigit || scndDigit == thirdDigit)
         {
             std::cout << "True \n";
         }
