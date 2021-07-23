@@ -6,7 +6,7 @@ int main()
     std::cin >> num;
     int cnt = 0;
 
-    while(num >= 0 )
+    while(num > 0 )
     {
         if(num % 2 == 0)
         {
