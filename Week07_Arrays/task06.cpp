@@ -82,10 +82,13 @@ void bubbleOptimised(int *array, int size)
                 changed = true;
             }
         }
+        
         sorted++;
+        
     } while (changed);
 
 }
+
 void selectionSort(int *array, int size)
 {
     for (int i = 0; i < size; i++)
