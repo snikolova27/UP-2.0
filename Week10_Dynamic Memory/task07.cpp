@@ -47,7 +47,7 @@ int main()
         int **array2d = new (std::nothrow) int *[size + 1];
         if (!array2d)
         {
-            std::cout << "Problem allcoting memory for 2D array :(" << std::endl;
+            std::cout << "Problem allocating memory for 2D array :(" << std::endl;
         }
 
         else
