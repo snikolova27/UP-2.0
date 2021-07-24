@@ -66,6 +66,26 @@ void bubbleSort(int *array, int size)
     }
 }
 
+void bubbleOptimised(int *array, int size)
+{
+    bool changed = false;
+    int sorted = 0;
+
+    do
+    {
+        changed = false;
+        for (int i = size - 1; i > sorted; i--)
+        {
+            if (array[i] < array[i - 1])
+            {
+                swap(array[i], array[i - 1]);
+                changed = true;
+            }
+        }
+        sorted++;
+    } while (changed);
+
+}
 void selectionSort(int *array, int size)
 {
     for (int i = 0; i < size; i++)
@@ -103,7 +123,6 @@ int main()
     std::cout << std::endl;
     insertionSort(numbers, size);
     printArray(numbers, size);
-
 
     return 0;
 }
