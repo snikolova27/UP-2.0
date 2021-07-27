@@ -48,10 +48,19 @@ int main()
     std::cout << "Enter size of first string ";
     std::cin >> size1;
 
-    if (size1)
+    if (!size1)
+    {
+        std::cout << "Size should be more than 0!" << std::endl;
+    }
+    else
     {
         char *str1 = new (std::nothrow) char[size1];
-        if (str1)
+
+        if (!str1)
+        {
+            std::cout << "Problem allocating memory for string 1 :(" << std::endl;
+        }
+        else
         {
             input(str1, size1);
 
@@ -59,10 +68,20 @@ int main()
             std::cout << "Enter size of string to concatenate the first with: ";
             std::cin >> size2;
 
-            if (size2)
+            if (!size2)
+            {
+                std::cout << "Size should be more than 0!" << std::endl;
+            }
+
+            else
             {
                 char *str2 = new (std::nothrow) char[size2];
-                if (str2)
+
+                if (!str2)
+                {
+                    std::cout << "Problem allocating memory for string 2 :(" << std::endl;
+                }
+                else
                 {
                     input(str2, size2);
                     char *concatenated = concatenate(str1, size1, str2, size2);
@@ -72,32 +91,11 @@ int main()
                     }
                     delete[] concatenated;
                 }
-
-                else
-                {
-                    std::cout << "Problem allocating memory for string 2 :(" << std::endl;
-                }
-
                 delete[] str2;
-            }
-
-            else
-            {
-                std::cout << "Size should be more than 0!" << std::endl;
             }
 
             delete[] str1;
         }
-
-        else
-        {
-            std::cout << "Problem allocating memory for string 1 :(" << std::endl;
-        }
-    }
-    
-    else
-    {
-        std::cout << "Size should be more than 0!" << std::endl;
     }
 
     return 0;
