@@ -2,6 +2,7 @@
 
 const int MAX_ARRAY_SIZE = 20;
 const int MAX_RESULT_SIZE = 40;
+const int MAX_CHAR = 26;
 
 int strlen(const char str[])
 {
@@ -65,6 +66,25 @@ void concatenate(const char str1[], int size1, const char str2[], int size2, cha
     }
     result[sizeRes] = '\0';
 }
+
+void sortAlphabetical(char str[])
+{
+    int charCount[MAX_CHAR] = {};
+    int len = strlen(str);
+
+    for (int i = 0; i < len; i++)
+    {
+        charCount[str[i] - 'a']++;
+    }
+
+    for (int i = 0; i < MAX_CHAR; i++)
+    {
+        for (int k = 0; k < charCount[i]; k++)
+        {
+            std::cout << char('a' + i);
+        }
+    }
+}
 int main()
 {
     char string1[MAX_ARRAY_SIZE] = {};
@@ -88,6 +108,8 @@ int main()
 
     concatenate(string1, str1Len, string2, str2Len, concatenated, lenRes);
     std::cout << concatenated << std::endl;
+    sortAlphabetical(concatenated);
+
     //selectionSort(concatenated, lenRes);
     // std::cout << concatenated << std::endl; //sнещо се чупи на тази сортировка
     return 0;
