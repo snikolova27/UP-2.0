@@ -49,12 +49,12 @@ int main()
 
     if (lenght && lenght < 1000)
     {
-        word = new (std::nothrow) char[lenght];
+        word = new (std::nothrow) char[lenght + 1];
         if (!word)
         {
             std::cout << "Memory allocation problem" << std::endl;
         }
-        
+
         else
         {
             char ch;
