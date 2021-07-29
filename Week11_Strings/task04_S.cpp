@@ -16,7 +16,7 @@ int strlen(const char str[])
 
 void strcopy(const char source[], char dest[])
 {
-    int len = strlen(source);
+    int len = strlen(source) + 1;
     for (int i = 0; i < len; i++)
     {
         dest[i] = source[i];
