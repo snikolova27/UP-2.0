@@ -28,8 +28,7 @@ void removeDuplicates(char str[], int len, char result[])
     int resLen = 0;
     int i = 0;
 
-    result[resLen] = str[0];
-
+    
     while (i < len)
     {
         bool occured = true;
@@ -50,7 +49,10 @@ void removeDuplicates(char str[], int len, char result[])
                 resLen++;
                 break;
             }
-            //aaaaabbbooprrrr returns abop, needs fixing
+        }
+        if (occured)
+        {
+            result[resLen] = str[i];
         }
         i += cntOccurence;
     }
