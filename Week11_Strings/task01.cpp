@@ -47,18 +47,14 @@ int main()
     std::cout << "Enter lenght of word: ";
     std::cin >> lenght;
 
-    if (!lenght || lenght > 1000)
-    {
-        std::cout << "Lenght should be in the interval [1,1000]" << std::endl;
-    }
-
-    else
+    if (lenght && lenght < 1000)
     {
         word = new (std::nothrow) char[lenght];
         if (!word)
         {
             std::cout << "Memory allocation problem" << std::endl;
         }
+        
         else
         {
             char ch;
@@ -77,6 +73,11 @@ int main()
             mostEncountered(word, lenght);
         }
         delete[] word;
+    }
+
+    else
+    {
+        std::cout << "Lenght should be in the interval [1,1000]" << std::endl;
     }
 
     return 0;
