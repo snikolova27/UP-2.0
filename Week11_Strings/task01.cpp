@@ -4,6 +4,7 @@ void mostEncountered(char *array, int size)
 {
     char res = array[0];
     int cntMax = 1;
+    int resIdx = 0;
 
     for (int i = 0; i < size; i++)
     {
@@ -20,12 +21,12 @@ void mostEncountered(char *array, int size)
 
         if (cnt > cntMax)
         {
-            res = array[i];
+            resIdx = i;
             cntMax = cnt;
         }
     }
 
-    std::cout << "Most encountered: " << res << " " << cntMax << " times" << std::endl;
+    std::cout << "Most encountered: " << array[resIdx] << " " << cntMax << " times" << std::endl;
 }
 
 void print(char *array, int size)
@@ -38,6 +39,25 @@ void print(char *array, int size)
     }
 
     std::cout << std::endl;
+}
+
+int strlen(const char str[])
+{
+    int len = 0;
+    while (str[len])
+    {
+        len++;
+    }
+    return len;
+}
+
+void strcopy(const char src[], char dest[])
+{
+    int len = strlen(src);
+    for (int i = 0; i < len; i++)
+    {
+        dest[i] = src[i];
+    }
 }
 
 int main()
@@ -57,16 +77,20 @@ int main()
 
         else
         {
-            char ch;
-            int cnt = 0;
-            std::cin >> ch;
+            char buffer[1000];
+            std::cin >> buffer;
+            strcopy(buffer, word);
 
-            while (ch >= 'a' && ch <= 'z' && cnt < lenght)
-            {
-                word[cnt] = ch;
-                std::cin >> ch;
-                cnt++;
-            }
+            // char ch;
+            // int cnt = 0;
+            // std::cin >> ch;
+
+            // while (ch >= 'a' && ch <= 'z' && cnt < lenght)
+            // {
+            //     word[cnt] = ch;
+            //     std::cin >> ch;
+            //     cnt++;
+            // }
             word[lenght] = '\0';
 
             print(word, lenght);

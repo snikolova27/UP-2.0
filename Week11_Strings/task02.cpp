@@ -40,7 +40,7 @@ int main()
 
     int currentLen = 0;
     int maxLen = 0;
-    int end = 1;
+    bool end = 1;
 
     do
     {

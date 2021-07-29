@@ -57,7 +57,7 @@ int sameLetters(char string[], char word[])
 
     for (int i = 0; i < ALPHABET; i++)
     {
-        if (lettersInStr[i] == lettersInWord[i] && lettersInStr[i] != 0 && lettersInWord[i] != 0)
+        if (lettersInStr[i] > 0 && lettersInWord[i] > 0)
         {
             cnt++;
         }
@@ -69,7 +69,7 @@ int sameLetters(char string[], char word[])
 int main()
 {
     char string[MAX_STRING_LEN] = {}, word[MAX_WORD_LEN] = {};
-    std::cin >> string;
+    std::cin.getline(string, MAX_STRING_LEN);
     std::cin >> word;
 
     std::cout << sameLetters(string, word) << std::endl;
