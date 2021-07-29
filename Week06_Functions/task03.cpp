@@ -28,6 +28,7 @@ int main()
     }
 
     std::cout << "Palindromes in given interval: ";
+    
     for (int i = k; i <= l; i++)
     {
         if (isPalindrome(i))
