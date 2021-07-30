@@ -39,7 +39,7 @@ int hammingDistance(const char *firstStr, const char *scndStr)
     else
     {
         len = len1 < len2 ? len1 : len2;
-        diff = abs(len1 - len2);
+        diff = std::max(len1, len2) - std::min(len1, len2);
     }
 
     for (int i = 0; i < len; i++)
