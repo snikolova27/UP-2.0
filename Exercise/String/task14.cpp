@@ -19,13 +19,9 @@ int input(char sentence[MAX_WORDS][MAX_LETTERS_IN_WORD])
     int cnt = 0;
     std::cin >> sentence[cnt];
 
-    while (true)
+    while ((strlen(sentence[cnt]) != 1 && sentence[cnt][0] != '.'))
     {
 
-        if ((strlen(sentence[cnt]) == 1 && sentence[cnt][0] == '.'))
-        {
-            break;
-        }
         if (sentence[cnt][strlen(sentence[cnt]) - 1] == '.')
         {
             cnt++;

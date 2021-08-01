@@ -41,14 +41,14 @@ void printStrings(const char *str1, int len1, const char *str2, int len2)
                 found = true;
                 break;
             }
-            if (found)
-            {
-                break;
-            }
+        }
+        if (found)
+        {
+            break;
         }
     }
 
-   // std::cout << indexFirst << indexScnd << std::endl;
+    // std::cout << indexFirst << indexScnd << std::endl;
     if (indexFirst >= 0 && indexScnd >= 0)
     {
         for (int i = 0; i < indexFirst; i++)
@@ -85,6 +85,10 @@ void printStrings(const char *str1, int len1, const char *str2, int len2)
             }
             std::cout << std::endl;
         }
+    }
+    else
+    {
+        std::cout << "No shared characters!" << std::endl;
     }
 }
 int main()
