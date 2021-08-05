@@ -255,11 +255,15 @@ int cntWordsInSentence(char **sentence)
     return cnt;
 }
 
-char **readSentence()
+char **readSentence(int cnt)
 {
     char **string;
     char buffer[MAX_LINE_LEN] = {};
-    std::cin.ignore();
+    if (cnt == 0)
+    {
+        std::cin.ignore();
+    }
+
     std::cin.getline(buffer, MAX_LINE_LEN);
     int len = strlen(buffer) + 1;
 
@@ -384,6 +388,7 @@ char **readSentence()
             }
         }
     }
+
     return string;
 }
 
@@ -396,7 +401,7 @@ void printSentence(char **sentence, int words)
     std::cout << std::endl;
 }
 
-//Required functions 
+//Required functions
 char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWords, int sizeDict)
 {
     char **result = new (std::nothrow) char *[cntWords];
@@ -409,9 +414,9 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
     for (int i = 0; i < cntWords; i++)
     {
         int currentLen = strlen(toEncrypt[i]);
-       // std::cout << "current Len: " << currentLen << std::endl;
+        // std::cout << "current Len: " << currentLen << std::endl;
 
-        //The word consistS only of 1 letter
+        //The word consists only of 1 letter
         if (currentLen == 1)
         {
             int idx = findLetterInDict(toEncrypt[i][0], letters, sizeDict);
@@ -427,7 +432,6 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
                 }
                 result[i][0] = toEncrypt[i][0];
                 result[i][1] = '\0';
-        
             }
 
             //There is a corresponding letter and we encrypt it
@@ -444,20 +448,21 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
                 strcopy(cryptedWords[idx], result[i]);
             }
 
-            std::cout << result[i] << " Line 446 " << std::endl;
+            //std::cout << result[i] << " Line 447 " << std::endl;
         }
 
         else
         {
-          //  std::cout << "Else statement 450 line" << std::endl;
+            //  std::cout << "Else statement 450 line" << std::endl;
             for (int j = 0; j < currentLen; j++)
             {
                 int idx = findLetterInDict(toEncrypt[i][j], letters, sizeDict);
-               // std::cout << "Idx:" << idx << std::endl;
+                // std::cout << "Idx:" << idx << std::endl;
+
                 //If there is a corresponding letter
                 if (idx >= 0)
                 {
-                    std::cout << " j: " << j << std::endl;
+                    //    std::cout << " j: " << j << std::endl;
                     if (j == 0)
                     {
 
@@ -470,23 +475,23 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
                             return nullptr;
                         }
                         strcopy(cryptedWords[idx], result[i]);
-                      //  std::cout << result[i] << std::endl;
+                        //  std::cout << result[i] << std::endl;
                     }
 
                     else
                     {
                         int newLen = 1 + strlen(result[i]);
-                      //  std::cout << "New len: " << newLen << std::endl;
+                        //  std::cout << "New len: " << newLen << std::endl;
                         char *temp1 = new (std::nothrow) char[newLen];
                         if (!temp1)
                         {
                             return nullptr;
                         }
                         strcopy(result[i], temp1);
-                      //  std::cout << "Temp1: " << result[i] << std::endl;
+                        //  std::cout << "Temp1: " << result[i] << std::endl;
 
                         char *temp = strconcat(temp1, cryptedWords[idx]);
-                     //   std::cout << "temp: " << temp << std::endl;
+                        //   std::cout << "temp: " << temp << std::endl;
                         newLen = strlen(temp);
 
                         result[i] = new (std::nothrow) char[newLen];
@@ -503,31 +508,47 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
                 }
                 else
                 {
-                    int newLen = 1 + strlen(result[i]);
-                   // std::cout << "New len: " << newLen << std::endl;
-                    char *temp1 = new (std::nothrow) char[newLen];
-                    if (!temp1)
+                    if (result[i] == nullptr)
                     {
-                        return nullptr;
-                    }
-                    strcopy(result[i], temp1);
-                  //  std::cout << "Temp1: " << result[i] << std::endl;
+                        result[i] = new (std::nothrow) char[1];
+                        if (!result[i])
+                        {
+                            std::cout << "Memory allocation problem while allocating for crypting word" << std::endl;
+                            return nullptr;
+                        }
 
-                    result[i] = new (std::nothrow) char[newLen + 2];
-                    if (!result[i])
+                        result[i][0] = toEncrypt[i][j];
+                        result[i][1] = '\0';
+                    }
+                    else
                     {
-                        std::cout << "Memory allocation problem while allocating for crypting word" << std::endl;
-                        return nullptr;
-                    }
-                    result[i] = {};
-                    result[i] =strconcat(temp1, "##" ); //putting ## so the lenght increases and then we can change them into the symbol that we need
-                 //   std::cout << " After concat: " << result[i] << std::endl;
-                    newLen = strlen(result[i]);
-                    result[i][newLen - 2] = toEncrypt[i][j];
-                    result[i][newLen - 1] = '\0';
-                  //  std::cout << "After additions: " << result[i] << std::endl;
 
-                    delete[] temp1;
+                        int newLen = 1 + strlen(result[i]);
+                        // std::cout << "New len: " << newLen << std::endl;
+                        char *temp1 = new (std::nothrow) char[newLen];
+                        if (!temp1)
+                        {
+                            return nullptr;
+                        }
+                        strcopy(result[i], temp1);
+                        //  std::cout << "Temp1: " << result[i] << std::endl;
+
+                        result[i] = new (std::nothrow) char[newLen + 2];
+                        if (!result[i])
+                        {
+                            std::cout << "Memory allocation problem while allocating for crypting word" << std::endl;
+                            return nullptr;
+                        }
+                        result[i] = {};
+                        result[i] = strconcat(temp1, "##"); //putting ## so the lenght increases and then we can change them into the symbol that we need
+                                                            //   std::cout << " After concat: " << result[i] << std::endl;
+                        newLen = strlen(result[i]);
+                        result[i][newLen - 2] = toEncrypt[i][j];
+                        result[i][newLen - 1] = '\0';
+                        //  std::cout << "After additions: " << result[i] << std::endl;
+
+                        delete[] temp1;
+                    }
                 }
             }
         }
@@ -537,7 +558,7 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
 }
 
 //TODO
-char **decrypt(char **toDecrypt, char *letters, char **cryptedWords, int cntWords)  
+char **decrypt(char **toDecrypt, char *letters, char **cryptedWords, int cntWords)
 {
     char **result = new (std::nothrow) char *[cntWords];
     if (!result)
@@ -598,19 +619,24 @@ int main()
         }
     } while (cntToCrypt <= 0);
 
+    int cnt = 0;
     for (int i = 0; i < cntToCrypt; i++)
     {
-        std::cout << "Enter string to encrypt: ";
-        char **string = readSentence();
+
+        std::cout << "Enter string #" << i + 1 << " to encrypt: ";
+        char **string = readSentence(cnt);
+      //  std::cout << "read sentence!" << std::endl;
         int words = cntWordsInSentence(string);
         //std::cout << words << std::endl;
         printSentence(string, words);
-        std::cout << "563 line" << std::endl;
+        // std::cout << "609 line" << std::endl;
         char **res = encrypt(string, words, letters, crypted, size);
-        std::cout << "520 line" << std::endl;
+       // std::cout << "611 line" << std::endl;
         printSentence(res, words);
         delete[] string;
         delete[] res;
+        std::cin.clear();
+        cnt++;
     }
 
     // do
