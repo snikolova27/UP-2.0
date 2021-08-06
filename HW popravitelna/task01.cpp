@@ -1,6 +1,12 @@
 #include <iostream>
 
 // Dynamic array functions
+
+/**
+     * @brief Function to dynamically allocate an array of ints with given size
+     * @param size: Size of array to be allocated
+     * @return: Pointer to the allocated array or nullptr if allocation was no successful
+     */
 int *allocate(int size)
 {
     int *result = new (std::nothrow) int[size];
@@ -13,11 +19,19 @@ int *allocate(int size)
     return result;
 }
 
+/**
+     * @brief Function to  deallocate dynamically allocated array of ints
+     */
 void clear(int *arr)
 {
     delete[] arr;
 }
 
+/**
+     * @brief Function enter the elements of array
+     * @param arr: The array
+     * @param size: Size of array 
+     */
 void input(int *arr, int size)
 {
     std::cout << "Enter array elements: " << std::endl;
@@ -27,6 +41,12 @@ void input(int *arr, int size)
     }
 }
 
+/**
+     * @brief Recursive function to print the elements of an array
+     * @param arr: The array
+     * @param size: Size of array 
+     * @param pos: Position of element to print
+     */
 void print(int *arr, int size, int &pos)
 {
     if (pos == size)
@@ -40,6 +60,13 @@ void print(int *arr, int size, int &pos)
 }
 
 //Helper functions
+
+/**
+     * @brief Function to count the 1 bits in even and odd positions in a numvber
+     * @param num: The anumber
+     * @param evenPositions: Amount of 1 bits in even positions
+     * @param oddPositions: Amount of 1 bits in odd positions
+     */
 void count1s(int num, int &evenPositions, int &oddPositions)
 {
     evenPositions = 0;
@@ -65,14 +92,23 @@ void count1s(int num, int &evenPositions, int &oddPositions)
         tempOdd = (tempOdd >> 2);
     }
 }
-
+/**
+     * @brief Function to swap two ints
+     * @param a: First int
+     * @param b: Second int
+     */
 void swap(int &a, int &b)
 {
     int temp = a;
     a = b;
     b = temp;
 }
-
+/**
+     * @brief Function to remove an element at a certain position from an array
+     * @param arr: The array
+     * @param size: Size of array 
+     * @param pos: Position at which element is to be deleted
+     */
 void removeAtPosition(int *arr, int size, int pos)
 {
     for (int i = pos; i < size - 1; i++)
@@ -82,6 +118,14 @@ void removeAtPosition(int *arr, int size, int pos)
 }
 
 //Required functions
+
+/**
+     * @brief Function to decide if the first number is smaller by bits than the second one
+     * @param num1: First number
+     * @param num2: Second number
+     * @param areEqual: Stores whether the numbers have equal amount of 1 bits at odd and even positions
+     * @return True if first number is smaller by bits
+     */
 bool isNumberSmallerByBits(int num1, int num2, bool &areEqual)
 {
     int cntEven1, cntOdd1, cntEven2, cntOdd2;
@@ -97,6 +141,11 @@ bool isNumberSmallerByBits(int num1, int num2, bool &areEqual)
     return ((cntEven1 < cntEven2) || (cntEven1 == cntEven2 && cntOdd1 < cntOdd2));
 }
 
+/**
+     * @brief Function to sort the elements of an array 
+     * @param arr: The array
+     * @param size: Size of array 
+     */
 void sort(int *arr, int size)
 {
     bool isSorted = true;
@@ -120,6 +169,11 @@ void sort(int *arr, int size)
     } while (!isSorted);
 }
 
+/**
+     * @brief Function to remove equal (by the given by the task criteria) elements of an array
+     * @param arr: The array
+     * @param size: Size of array 
+     */
 void removeEquals(int *arr, int &size)
 {
 
