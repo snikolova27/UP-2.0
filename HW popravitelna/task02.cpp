@@ -4,6 +4,15 @@ const int MAX_CRYPTED_WORD_LEN = 10;
 const int MAX_LINE_LEN = 1000;
 
 //Helper functions
+void clear(char **str, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        delete[] str[i];
+    }
+    delete[] str;
+}
+
 int strlen(const char *str)
 {
     int len = 0;
@@ -247,18 +256,7 @@ int cntWords(const char *str, int len)
     return cnt;
 }
 
-int cntWordsInSentence(char **sentence)
-{
-    int cnt = 0;
-    while (sentence[cnt])
-    {
-        cnt++;
-    }
-
-    return cnt;
-}
-
-char **readSentence(int cnt)
+char **readSentence(int cnt, int &words)
 {
     char **string;
     char buffer[MAX_LINE_LEN] = {};
@@ -270,7 +268,7 @@ char **readSentence(int cnt)
     std::cin.getline(buffer, MAX_LINE_LEN);
     int len = strlen(buffer) + 1;
 
-    int words = cntWords(buffer, len);
+    words = cntWords(buffer, len);
 
     string = new (std::nothrow) char *[words];
 
@@ -328,7 +326,7 @@ char **readSentence(int cnt)
                 {
                     return nullptr;
                 }
-                
+
                 for (int k = startIdx, l = 0; k < j + 1 - startIdx; k++, l++)
                 {
                     temp[l] = buffer[k];
@@ -731,6 +729,7 @@ int main()
     printDic(letters, crypted, size);
 
     int cntToCrypt, cntToDecrypt;
+
     do
     {
         std::cout << "Enter how many strings you'll enter for encryption: ";
@@ -747,14 +746,14 @@ int main()
     for (int i = 0; i < cntToCrypt; i++)
     {
 
+        int words;
         std::cout << "Enter string #" << i + 1 << " to encrypt: ";
-        char **string = readSentence(cntEncrypt);
+        char **string = readSentence(cntEncrypt, words);
         if (!string)
         {
             return -1;
         }
-        int words = cntWordsInSentence(string);
-        //std::cout << words << std::endl;
+
         std::cout << "You have entered: ";
         printSentence(string, words);
 
@@ -763,11 +762,11 @@ int main()
         {
             return -1;
         }
-        std::cout << "Encrypted sentence #" << i + 1 << " :";
+        std::cout << "Encrypted sentence #" << i + 1 << ": ";
         printSentence(res, words);
 
-        delete[] string;
-        delete[] res;
+        clear(string, words);
+        clear(res, words);
         std::cin.clear();
         cntEncrypt++;
     }
@@ -787,14 +786,13 @@ int main()
     int cntDecrypt = 0;
     for (int i = 0; i < cntToDecrypt; i++)
     {
+        int words;
         std::cout << "Enter string #" << i + 1 << " to decrypt: ";
-        char **string = readSentence(cntDecrypt);
+        char **string = readSentence(cntDecrypt, words);
         if (!string)
         {
             return -1;
         }
-        int words = cntWordsInSentence(string);
-        //std::cout << words << std::endl;
         std::cout << "You have entered: ";
         printSentence(string, words);
 
@@ -804,11 +802,11 @@ int main()
             return -1;
         }
 
-        std::cout << "Decrypted string #" << i + 1 << " : ";
+        std::cout << "Decrypted string #" << i + 1 << ": ";
         printSentence(res, words);
 
-        delete[] string;
-        delete[] res;
+        clear(string, words);
+        clear(res, words);
         std::cin.clear();
         cntDecrypt++;
     }
