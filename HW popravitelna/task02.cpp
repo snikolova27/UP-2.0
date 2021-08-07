@@ -585,8 +585,6 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
                 }
                 strcopy(cryptedWords[idx], result[i]);
             }
-
-            //std::cout << result[i] << " Line 447 " << std::endl;
         }
         //The word consists of more than 1 letter
         else
@@ -600,7 +598,6 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
                 {
                     if (j == 0)
                     {
-
                         int newLen = strlen(cryptedWords[idx]) + 1;
 
                         result[i] = new (std::nothrow) char[newLen];
@@ -615,7 +612,6 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
                     else
                     {
                         int newLen = 1 + strlen(result[i]);
-                        //  std::cout << "New len: " << newLen << std::endl;
                         char *temp1 = new (std::nothrow) char[newLen];
                         if (!temp1)
                         {
@@ -721,9 +717,6 @@ char **decrypt(char **toDecrypt, int cntWords, char *letters, char **cryptedWord
 
             for (endIdx = startIdx + 1; endIdx <= len; endIdx++)
             {
-                // std::cout << "Start idx: " << startIdx << std::endl;
-                // std::cout << "end idx: " << endIdx << std::endl;
-
                 char *current = getSubstring(toDecrypt[i], startIdx, endIdx);
 
                 if (!current)
