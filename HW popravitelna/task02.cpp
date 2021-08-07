@@ -4,6 +4,12 @@ const int MAX_CRYPTED_WORD_LEN = 10;
 const int MAX_LINE_LEN = 1000;
 
 //Helper functions
+
+/**
+     * @brief Function to  deallocate dynamically allocated 2D array of chars
+     * @param str: 2D array of chars to deallocate
+     * @param len: Size of the first dimension of the array 
+     */
 void clear(char **str, int len)
 {
     for (int i = 0; i < len; i++)
@@ -13,6 +19,11 @@ void clear(char **str, int len)
     delete[] str;
 }
 
+/**
+     * @brief Function to find the length of a string
+     * @param str: String
+     * @return Length of given string
+     */
 int strlen(const char *str)
 {
     int len = 0;
@@ -23,6 +34,12 @@ int strlen(const char *str)
     return len;
 }
 
+/**
+     * @brief Function to compare two strings
+     * @param str1: First string
+     * @param str2: Second string
+     * @return True if the strings are equal, else -> false
+     */
 bool strcomp(const char *str1, const char *str2)
 {
     int len1 = strlen(str1);
@@ -43,6 +60,11 @@ bool strcomp(const char *str1, const char *str2)
     return true;
 }
 
+/**
+     * @brief Function to copy one string into another
+     * @param src: Source string - the one to be copied
+     * @param dest: Destination string - where to be copied
+     */
 void strcopy(const char *src, char *dest)
 {
     int idx = 0;
@@ -55,6 +77,12 @@ void strcopy(const char *src, char *dest)
     dest[idx] = '\0';
 }
 
+/**
+     * @brief Function to concatenate two strings
+     * @param str1: First string
+     * @param str2: Second string
+     * @return Concatenated string
+     */
 char *strconcat(char *str1, const char *str2)
 {
     int len1 = strlen(str1);
@@ -84,11 +112,20 @@ char *strconcat(char *str1, const char *str2)
     return res;
 }
 
+/**
+     * @brief Function to decide if a char is a letter
+     * @param ch: Character
+     * @return True it is a letter, else -> false
+     */
 bool isLetter(char ch)
 {
     return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
-
+/**
+     * @brief Function to make a char lowercase
+     * @param ch: Character to transform
+     * @return Character in lowercase
+     */
 char toLower(char ch)
 {
     if (ch >= 'A' && ch <= 'Z')
@@ -98,6 +135,12 @@ char toLower(char ch)
     return ch;
 }
 
+/**
+     * @brief Function to make a string lowercase
+     * @param string: String to transform
+     * @param len: Length of string
+     * @return String in lowercase
+     */
 char *toLowerString(char *string, int len)
 {
     char *result = new (std::nothrow) char[len + 1];
@@ -115,6 +158,12 @@ char *toLowerString(char *string, int len)
     return result;
 }
 
+/**
+     * @brief Function to check if a string contains only letters
+     * @param string: String to check
+     * @param len: Length of string
+     * @return True if all characters are lowercase, else -> false
+     */
 bool containsOnlyLetters(const char *string, int len)
 {
     for (int i = 0; i < len; i++)
@@ -128,6 +177,13 @@ bool containsOnlyLetters(const char *string, int len)
     return true;
 }
 
+/**
+     * @brief Function to read the dictionary and check if it is valid
+     * @param size: Size of dictionary
+     * @param letters: Array of letters for the dictionary
+     * @param cryptedWords: Array of crypted words corresponding to each letter
+     * @return True if dictionary is entered correctly, else -> false
+     */
 bool readDictionary(int size, char *&letters, char **&cryptedWords)
 {
     //Allocating memory for the letters of the dictionary
@@ -196,6 +252,12 @@ bool readDictionary(int size, char *&letters, char **&cryptedWords)
     return true;
 }
 
+/**
+    * @brief Function to clear the dictionary
+    * @param letters: Array of letters for the dictionary
+    * @param cryptedWords: Array of crypted words corresponding to each letter
+    * @param size: Size of dictionary
+    */
 void clearDictionary(char *letters, char **cryptedWords, int size)
 {
     delete[] letters;
@@ -207,6 +269,12 @@ void clearDictionary(char *letters, char **cryptedWords, int size)
     delete[] cryptedWords;
 }
 
+/**
+    * @brief Function to print the dictionary
+    * @param letters: Array of letters for the dictionary
+    * @param cryptedWords: Array of crypted words corresponding to each letter
+    * @param size: Size of dictionary
+    */
 void printDic(char *letters, char **cryptedWords, int size)
 {
     for (int i = 0; i < size; i++)
@@ -215,7 +283,14 @@ void printDic(char *letters, char **cryptedWords, int size)
     }
 }
 
-int findLetterInDict(char toFind, char *letters, int size) //returns index of correspondindg crypted word
+/**
+    * @brief Function to find a letter in the dictionary
+    * @param toFind: Letter to find
+    * @param letters: Array of letters for the dictionary
+    * @param size: Size of dictionary
+    * @return Index of the letter in the dictionary, -1 if letter is not found in the dictionary
+    */
+int findLetterInDict(char toFind, char *letters, int size)
 {
     for (int i = 0; i < size; i++)
     {
@@ -227,7 +302,14 @@ int findLetterInDict(char toFind, char *letters, int size) //returns index of co
     return -1;
 }
 
-int findWordInDict(char *toFind, char **cryptedWords, int size) //returns index of corresponding letter
+/**
+    * @brief Function to find a word in the dictionary
+    * @param toFind: Word to find
+    * @param cryptedWords: Array of crypted words corresponding to each letter
+    * @param size: Size of dictionary
+    * @return Index of the word in the dictionary, -1 if word is not found in the dictionary
+    */
+int findWordInDict(char *toFind, char **cryptedWords, int size)
 {
     int len = strlen(toFind);
     for (int i = 0; i < size; i++)
@@ -238,10 +320,15 @@ int findWordInDict(char *toFind, char **cryptedWords, int size) //returns index 
             return i;
         }
     }
-
     return -1;
 }
 
+/**
+    * @brief Function to find the amount of words in a string
+    * @param str: String 
+    * @param len: Length of string
+    * @return Count of words in given string
+    */
 int cntWords(const char *str, int len)
 {
     int cnt = 1;
@@ -256,6 +343,12 @@ int cntWords(const char *str, int len)
     return cnt;
 }
 
+/**
+    * @brief Function to read a sentence from the console
+    * @param cnt: Used to decide wheter to use std::cin.clear() 
+    * @param words: Words in sentence
+    * @return 2D array, first dimension is the amount of words, each first index corresponds to a word
+    */
 char **readSentence(int cnt, int &words)
 {
     char **string;
@@ -396,6 +489,11 @@ char **readSentence(int cnt, int &words)
     return string;
 }
 
+/**
+    * @brief Function to print a sentence
+    * @param sentence: Sentence to print 
+    * @param words: Count of words in sentence
+    */
 void printSentence(char **sentence, int words)
 {
     for (int i = 0; i < words; i++)
@@ -405,6 +503,12 @@ void printSentence(char **sentence, int words)
     std::cout << std::endl;
 }
 
+/**
+    * @brief Function to generate a substring from given string
+    * @param string: String to generate a substring from
+    * @param startingPos: Starting position of substring
+    * @param endingPos: Ending position of substring
+    */
 char *getSubstring(char *string, int startingPos, int endingPos)
 {
     if (startingPos < 0 || endingPos > strlen(string))
@@ -428,6 +532,15 @@ char *getSubstring(char *string, int startingPos, int endingPos)
 }
 
 //Required functions
+
+/**
+    * @brief Function to encrypt a sentence
+    * @param toEncrypt: Sentence to encrypt splitted into individual words
+    * @param cntWords: Count of words in the sentence
+    * @param letters: Array of letters for the dictionary
+    * @param cryptedWords: Array of crypted words corresponding to each letter
+    * @param sizeDict: Size of dictionary
+    */
 char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWords, int sizeDict)
 {
     char **result = new (std::nothrow) char *[cntWords];
@@ -576,6 +689,14 @@ char **encrypt(char **toEncrypt, int cntWords, char *letters, char **cryptedWord
     return result;
 }
 
+/**
+    * @brief Function to decrypt a sentence
+    * @param toEncrypt: Sentence to decrypt splitted into individual words
+    * @param cntWords: Count of words in the sentence
+    * @param letters: Array of letters for the dictionary
+    * @param cryptedWords: Array of crypted words corresponding to each letter
+    * @param sizeDict: Size of dictionary
+    */
 char **decrypt(char **toDecrypt, int cntWords, char *letters, char **cryptedWords, int sizeDict)
 {
 
