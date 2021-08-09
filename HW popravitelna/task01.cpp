@@ -7,9 +7,9 @@
      * @param size: Size of array to be allocated
      * @return: Pointer to the allocated array or nullptr if allocation was no successful
      */
-int *allocate(int size)
+unsigned int *allocate(int size)
 {
-    int *result = new (std::nothrow) int[size];
+    unsigned int *result = new (std::nothrow) unsigned int[size];
     if (!result)
     {
         std::cout << "Memory allocation problem" << std::endl;
@@ -22,7 +22,7 @@ int *allocate(int size)
 /**
      * @brief Function to  deallocate dynamically allocated array of ints
      */
-void clear(int *arr)
+void clear(unsigned int *arr)
 {
     delete[] arr;
 }
@@ -32,7 +32,7 @@ void clear(int *arr)
      * @param arr: The array
      * @param size: Size of array 
      */
-void input(int *arr, int size)
+void input(unsigned int *arr, int size)
 {
     std::cout << "Enter array elements: " << std::endl;
     for (int i = 0; i < size; i++)
@@ -47,7 +47,7 @@ void input(int *arr, int size)
      * @param size: Size of array 
      * @param pos: Position of element to print
      */
-void print(int *arr, int size, int &pos)
+void print(unsigned int *arr, int size, int &pos)
 {
     if (pos == size)
     {
@@ -67,7 +67,7 @@ void print(int *arr, int size, int &pos)
      * @param evenPositions: Amount of 1 bits in even positions
      * @param oddPositions: Amount of 1 bits in odd positions
      */
-void count1s(int num, int &evenPositions, int &oddPositions)
+void count1s(unsigned int num, int &evenPositions, int &oddPositions)
 {
     evenPositions = 0;
     oddPositions = 0;
@@ -97,7 +97,7 @@ void count1s(int num, int &evenPositions, int &oddPositions)
      * @param a: First int
      * @param b: Second int
      */
-void swap(int &a, int &b)
+void swap(unsigned int &a, unsigned int &b)
 {
     int temp = a;
     a = b;
@@ -109,7 +109,7 @@ void swap(int &a, int &b)
      * @param size: Size of array 
      * @param pos: Position at which element is to be deleted
      */
-void removeAtPosition(int *arr, int size, int pos)
+void removeAtPosition(unsigned int *arr, int size, int pos)
 {
     for (int i = pos; i < size - 1; i++)
     {
@@ -126,7 +126,7 @@ void removeAtPosition(int *arr, int size, int pos)
      * @param areEqual: Stores whether the numbers have equal amount of 1 bits at odd and even positions
      * @return True if first number is smaller by bits
      */
-bool isNumberSmallerByBits(int num1, int num2, bool &areEqual)
+bool isNumberSmallerByBits(unsigned int num1, unsigned int num2, bool &areEqual)
 {
     int cntEven1, cntOdd1, cntEven2, cntOdd2;
 
@@ -146,7 +146,7 @@ bool isNumberSmallerByBits(int num1, int num2, bool &areEqual)
      * @param arr: The array
      * @param size: Size of array 
      */
-void sort(int *arr, int size)
+void sort(unsigned int *arr, int size)
 {
     bool isSorted = true;
     bool boolForFunc = false;
@@ -174,7 +174,7 @@ void sort(int *arr, int size)
      * @param arr: The array
      * @param size: Size of array 
      */
-void removeEquals(int *arr, int &size)
+void removeEquals(unsigned int *arr, int &size)
 {
 
     for (int i = 0; i < size - 1; i++)
@@ -217,7 +217,7 @@ int main()
     } while (n <= 0);
 
     size = n;
-    int *numbers = allocate(size);
+    unsigned int *numbers = allocate(size);
     if (!numbers)
     {
         return -1; //mark that the allocation has failed, the above function returns nullptr if that's the case
