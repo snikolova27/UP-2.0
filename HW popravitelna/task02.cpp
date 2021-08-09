@@ -810,11 +810,19 @@ int main()
     char *letters;
     char **crypted;
     int n, size;
+
+    std::cout << "Enter size of dictionary: ";
+    std::cin >> n;
+
+    if (!std::cin)
+    {
+
+        std::cout << "Invalid user input. You should enter a number." << std::endl;
+        return -2;
+    }
+
     do
     {
-        std::cout << "Enter size of dictionary: ";
-        std::cin >> n;
-
         if (n <= 0)
         {
             std::cout << "Size should be > 0. Try again." << std::endl;
@@ -844,10 +852,18 @@ int main()
 
     int cntToCrypt, cntToDecrypt;
 
+    std::cout << "Enter how many strings you'll enter for encryption: ";
+    std::cin >> cntToCrypt;
+
+    if (!std::cin)
+    {
+
+        std::cout << "Invalid user input. You should enter a number." << std::endl;
+        return -2;
+    }
+
     do
     {
-        std::cout << "Enter how many strings you'll enter for encryption: ";
-        std::cin >> cntToCrypt;
         if (cntToCrypt <= 0)
         {
             std::cout << "Count of strings to crypt should be > 0. Try again." << std::endl;
@@ -885,10 +901,17 @@ int main()
         cntEncrypt++;
     }
 
+    std::cout << "Enter how many strings you'll enter for decryption: ";
+    std::cin >> cntToDecrypt;
+
+    if (!std::cin)
+    {
+
+        std::cout << "Invalid user input. You should enter a number." << std::endl;
+        return -2;
+    }
     do
     {
-        std::cout << "Enter how many strings you'll enter for decryption: ";
-        std::cin >> cntToDecrypt;
         if (cntToDecrypt <= 0)
         {
             std::cout << "Count of strings to decrypt should be > 0. Try again." << std::endl;

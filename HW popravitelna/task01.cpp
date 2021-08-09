@@ -37,7 +37,18 @@ void input(unsigned int *arr, int size)
     std::cout << "Enter array elements: " << std::endl;
     for (int i = 0; i < size; i++)
     {
-        std::cin >> arr[i];
+        unsigned int temp;
+        std::cin >> temp;
+        do
+        {
+            if (!std::cin)
+            {
+                std::cout << "Enter positive number: ";
+                std::cin >> temp;
+            }
+        } while (!std::cin);
+
+        arr[i] = temp;
     }
 }
 
@@ -202,19 +213,24 @@ int main()
 {
     int n, size;
 
-    do
+    std::cout << "Enter size of array: ";
+    std::cin >> n;
+    
+    if (!std::cin)
     {
-        std::cout << "Enter size of array: ";
-        std::cin >> n;
 
-        if (n <= 0)
+        std::cout << "Invalid user input. You should enter a number." << std::endl;
+        return -2;
+    }
+    if (n <= 0)
+    {
+        do
         {
             std::cout << "Size should be > 0. Try again." << std::endl;
             std::cout << "Size: ";
             std::cin >> n;
-        }
-
-    } while (n <= 0);
+        } while (n <= 0);
+    }
 
     size = n;
     unsigned int *numbers = allocate(size);

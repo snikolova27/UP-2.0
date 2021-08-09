@@ -172,11 +172,16 @@ int main()
     int tiles;
     Domino *dominos;
 
+    std::cout << "Enter amount of tiles you'll enter: ";
+    std::cin >> tiles;
+
+    if (!std::cin)
+    {
+        std::cout << "Invalid user input. You should enter a number." << std::endl;
+        return -2;
+    }
     do
     {
-        std::cout << "Enter amount of tiles you'll enter: ";
-        std::cin >> tiles;
-
         if (tiles <= 0)
         {
             std::cout << "Tiles should be > 0. Try again." << std::endl;
@@ -202,21 +207,21 @@ int main()
     if (!currentRow)
     {
         std::cout << "Problem while allocating memory for the current row" << std::endl;
-        return -2;
+        return -1;
     }
 
     Domino *maxRow = new (std::nothrow) Domino[tiles];
     if (!maxRow)
     {
         std::cout << "Problem while allocating memory for the max row" << std::endl;
-        return -2;
+        return -1;
     }
 
     int *usedTiles = new (std::nothrow) int[tiles];
     if (!usedTiles)
     {
         std::cout << "Problem while allocating memory for the used tiles" << std::endl;
-        return -2;
+        return -1;
     }
 
     int maxCnt = 1;
@@ -240,7 +245,7 @@ int main()
     {
 
         std::cout << "Problem while allocating memory for the result" << std::endl;
-        return -2;
+        return -1;
     }
 
     for (int i = 0; i < maxCnt; i++)
