@@ -531,6 +531,17 @@ char *getSubstring(char *string, int startingPos, int endingPos)
     return result;
 }
 
+bool isDecrypted(char **decrypted, char **toDecrypt, int cntWords)
+{
+    for (int i = 0; i < cntWords; i++)
+    {
+        if (strcomp(decrypted[i], toDecrypt[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
 //Required functions
 
 /**
@@ -939,8 +950,15 @@ int main()
             return -1;
         }
 
-        std::cout << "Decrypted string #" << i + 1 << ": ";
-        printSentence(res, words);
+        if (!isDecrypted(res, string, words))
+        {
+            std::cout << "Bad string!" << std::endl;
+        }
+        else
+        {
+            std::cout << "Decrypted string #" << i + 1 << ": ";
+            printSentence(res, words);
+        }
 
         clear(string, words);
         clear(res, words);
