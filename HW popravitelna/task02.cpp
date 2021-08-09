@@ -865,7 +865,7 @@ int main()
 
     } while (!isDictionaryValid);
 
-    std::cout << std::boolalpha << isDictionaryValid << std::endl;
+    //std::cout << std::boolalpha << isDictionaryValid << std::endl;
     printDic(letters, crypted, size);
 
     int cntToCrypt, cntToDecrypt;
