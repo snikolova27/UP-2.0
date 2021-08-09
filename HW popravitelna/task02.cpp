@@ -531,6 +531,13 @@ char *getSubstring(char *string, int startingPos, int endingPos)
     return result;
 }
 
+/**
+    * @brief Function to check if a sentence has been decrypted successfully
+    * @param decrypted: Sentence after decrypting 
+    * @param toDecrypt: Original sentence to decrypt
+    * @param cntWords: Count of words in the sentence
+    * @return True if decryption is successful, else -> false
+    */
 bool isDecrypted(char **decrypted, char **toDecrypt, int cntWords)
 {
     for (int i = 0; i < cntWords; i++)
