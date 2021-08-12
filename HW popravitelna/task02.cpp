@@ -331,12 +331,24 @@ int findWordInDict(char *toFind, char **cryptedWords, int size)
     */
 int cntWords(const char *str, int len)
 {
-    int cnt = 1;
-    for (int i = 0; i < len; i++)
+    int cnt = 0;
+    while (*str)
     {
-        if ((str[i] == ' ' || str[i] == '\t') && str[i + 1] != ' ' && str[i + 2] != ' ' && str[i + 1] != '\t' && str[i + 2] != '\t')
+        // skip symbols to the beginning of a word
+        while (*str && !isLetter(*str))
         {
-            cnt++;
+            ++str;
+        }
+        // if there is a word, count it
+        if (*str)
+        {
+            ++cnt;
+        }
+        // skip to the end of the word
+        while (isLetter(*str))
+        {
+            ++str;
+            ;
         }
     }
 
@@ -401,7 +413,6 @@ char **readSentence(int cnt, int &words)
                 return nullptr;
             }
             strcopy(temp, string[i]);
-            //std::cout << "Word #" << i + 1 << " " << string[i] << std::endl;
             delete[] temp;
             break;
         }
@@ -411,9 +422,8 @@ char **readSentence(int cnt, int &words)
             // first word
             if (buffer[j] == ' ' && cntSpaces == 0)
             {
-                // std::cout << "start idx:" << startIdx << std::endl;
                 endIdx = j;
-                // std::cout << "end idx: " << endIdx << std::endl;
+
                 char *temp = new (std::nothrow) char[j + 1 - startIdx];
                 if (!temp)
                 {
@@ -434,9 +444,9 @@ char **readSentence(int cnt, int &words)
                     return nullptr;
                 }
                 strcopy(temp, string[i]);
-                // std::cout << "Word #" << i + 1 << " " << string[i] << std::endl;
+
                 startIdx = endIdx + 1;
-                // std::cout << " next start idx:" << startIdx << std::endl;
+
                 cntSpaces++;
                 delete[] temp;
                 break;
@@ -445,13 +455,12 @@ char **readSentence(int cnt, int &words)
             else if (startIdx != 0)
             {
                 //find next space
-                //  std::cout << "current start idx: " << startIdx << std::endl;
+              
                 for (int h = startIdx; h < len; h++)
                 {
                     if (buffer[h] == ' ')
                     {
                         endIdx = h;
-                        //  std::cout << "next end idx: " << endIdx << std::endl;
                         break;
                     }
                 }
@@ -477,7 +486,6 @@ char **readSentence(int cnt, int &words)
                 }
                 strcopy(temp, string[i]);
 
-                // std::cout << "Word #" << i + 1 << " " << string[i] << std::endl;
                 startIdx = endIdx + 1;
                 cntSpaces++;
                 delete[] temp;
