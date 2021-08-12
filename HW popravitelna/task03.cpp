@@ -156,7 +156,7 @@ void findLongestRowOfDominos(Domino *array, int size, int &maxCnt, Domino *maxRo
                 usedTiles[currentCnt] = i;
                 findLongestRowOfDominos(array, size, maxCnt, maxRow, currentCnt + 1, currentRow, usedTiles);
             }
-            if (currentRow[currentCnt - 1].right == array[i].right && currentRow[currentCnt - 1].right != currentRow[currentCnt - 1].left)
+            if (currentRow[currentCnt - 1].right == array[i].right)
             {
                 currentRow[currentCnt].left = array[i].right;
                 currentRow[currentCnt].right = array[i].left;
