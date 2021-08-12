@@ -326,12 +326,12 @@ int findWordInDict(char *toFind, char **cryptedWords, int size)
 /**
     * @brief Function to find the amount of words in a string
     * @param str: String 
-    * @param len: Length of string
     * @return Count of words in given string
     */
-int cntWords(const char *str, int len)
+int cntWords(const char *str)
 {
     int cnt = 0;
+
     while (*str)
     {
         // skip symbols to the beginning of a word
@@ -348,7 +348,6 @@ int cntWords(const char *str, int len)
         while (isLetter(*str))
         {
             ++str;
-            ;
         }
     }
 
@@ -373,7 +372,7 @@ char **readSentence(int cnt, int &words)
     std::cin.getline(buffer, MAX_LINE_LEN);
     int len = strlen(buffer) + 1;
 
-    words = cntWords(buffer, len);
+    words = cntWords(buffer);
 
     string = new (std::nothrow) char *[words];
 
@@ -455,7 +454,7 @@ char **readSentence(int cnt, int &words)
             else if (startIdx != 0)
             {
                 //find next space
-              
+
                 for (int h = startIdx; h < len; h++)
                 {
                     if (buffer[h] == ' ')
